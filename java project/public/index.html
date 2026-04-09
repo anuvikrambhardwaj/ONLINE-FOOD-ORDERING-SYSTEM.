@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiggy Mini | Food Delivery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🍕 Swiggy Mega</div>
+        <div class="nav-links">
+            <div class="user-menu" id="user-menu-btn" onclick="toggleUserDropdown()">
+                <span id="nav-user-name">Login</span>
+                <div class="dropdown-content" id="user-dropdown">
+                    <a href="#" onclick="openMyOrders()">My Orders & Tracking</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                </div>
+            </div>
+            <button class="cart-btn" onclick="toggleCart()">
+                🛒 Cart (<span id="cart-count">0</span>)
+            </button>
+        </div>
+    </nav>
+
+    <!-- Categories Filter Bar -->
+    <div class="categories-bar">
+        <button class="cat-btn active" onclick="filterCategory('All')">All</button>
+        <button class="cat-btn" onclick="filterCategory('Vegetables')">Vegetables</button>
+        <button class="cat-btn" onclick="filterCategory('Fruits')">Fruits</button>
+        <button class="cat-btn" onclick="filterCategory('Non-Veg')">Non-Veg</button>
+        <button class="cat-btn" onclick="filterCategory('99 Store')">99 Store</button>
+    </div>
+
+    <div class="main-container">
+        <div class="menu-section">
+            <h2 id="section-title">All Items</h2>
+            <div class="menu-grid" id="menu-grid">
+                 <!-- Populated via JS -->
+                 <div class="loading">Loading massive catalog...</div>
+            </div>
+        </div>
+
+        <!-- Sidebar Cart -->
+        <div class="cart-sidebar" id="cart-sidebar">
+            <div class="cart-header">
+                <h2>Your Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            
+            <div class="cart-items" id="cart-items">
+                <div class="empty-cart">Cart is empty</div>
+            </div>
+
+            <div class="cart-footer">
+                <div class="total-row">
+                    <span>Total Amount</span>
+                    <span id="cart-total">₹0.00</span>
+                </div>
+                <!-- V3 Delivery Address -->
+                <textarea id="delivery-address" class="address-input" placeholder="Enter delivery address (e.g. 1st Floor, Building X)" rows="2"></textarea>
+                <button class="checkout-btn" id="checkout-btn" onclick="checkout()">
+                    Place Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals Overlay -->
+    <div class="cart-overlay" id="cart-overlay" onclick="closeAll()"></div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <h2 style="margin-bottom: 20px;">Login</h2>
+        
+        <div id="login-step-1">
+            <p style="color: gray; margin-bottom: 20px; font-size: 0.9rem;">Sign in to save your orders and track deliveries</p>
+            <input type="text" id="login-name" placeholder="Enter Full Name" class="modal-input" />
+            <input type="text" id="login-phone" placeholder="Enter Phone Number or Gmail" class="modal-input" />
+            <button class="modal-btn" onclick="directLogin()">Login</button>
+        </div>
+    </div>
+
+    <!-- My Orders Modal -->
+    <div class="modal my-orders-modal" id="orders-modal">
+        <div style="display:flex; justify-content:space-between; margin-bottom: 20px;">
+            <h2>My Orders & Tracking</h2>
+            <button class="close-cart" onclick="closeAll()">×</button>
+        </div>
+        <div id="orders-list">
+            <!-- Populated via JS -->
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
